@@ -1,0 +1,19 @@
+const TEACHER = 'TEACHER';
+const CHAT = 'CHAT';
+const INTERNSHIP = 'INTERNSHIP';
+const SPEC = 'SPEC';
+const DOCUMENT = 'DOCUMENT';
+const DEPARTMENT = 'DEPARTMENT';
+const DASHBOARD = 'DASHBOARD';
+const DETAIL = 'DETAIL';
+
+export {
+  TEACHER,
+  CHAT,
+  INTERNSHIP,
+  SPEC,
+  DOCUMENT,
+  DEPARTMENT,
+  DASHBOARD,
+  DETAIL,
+};

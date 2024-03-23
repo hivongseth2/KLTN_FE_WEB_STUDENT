@@ -1,0 +1,40 @@
+variables:
+  IMAGE_NAME: vncharles/ims-fe-web
+
+stages:
+  - linting
+  - test
+  - build
+  - deploy
+
+lint:
+  image: node:18.19.0
+  stage: linting
+  tags:
+    - docker
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "master"
+  before_script:
+    - npm install pnpm -g
+    - pnpm install
+    - pnpm install eslint prettier
+  script:
+    - pnpm lint
+    - pnpm prettier
+
+build-production-target:
+  image: docker:stable
+  services:
+    - docker:dind
+  stage: build
+  tags:
+    - docker
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "master"
+  before_script:
+    - docker login -u $USERNAME -p $TOKEN
+  script:
+    - cp .env.production.example .env
+    - docker build --target production -t $IMAGE_NAME:${CI_COMMIT_SHA:0:8} -t $IMAGE_NAME:latest .
+    - docker push $IMAGE_NAME:${CI_COMMIT_SHA:0:8}
+    - docker push $IMAGE_NAME:latest

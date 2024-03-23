@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+pnpm lint:fix && echo "Linting passed" || (echo "Linting failed. You are required to fix them first" && exit 1)
