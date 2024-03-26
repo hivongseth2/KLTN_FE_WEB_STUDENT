@@ -1,6 +1,8 @@
 import { Grid, Paper, Typography } from '@mui/material';
 
 function InfoTeacher({ title, vietnameseKeys, data }) {
+  console.log('key', vietnameseKeys);
+  console.log('data', data);
   const getGenderText = (value) => (value ? 'Nam' : 'Nữ');
   function getNestedValue(obj, key) {
     return key

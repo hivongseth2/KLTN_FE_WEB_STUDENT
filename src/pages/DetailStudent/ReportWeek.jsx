@@ -36,7 +36,7 @@ export default function ReportWeek() {
             <Grid container>
               <Grid item xs={9}>
                 <Typography variant="title2" sx={{ fontWeight: 'bold' }}>
-                  Week {report.week} - {report.date}
+                  Tuần {report.week} - {report.date}
                 </Typography>
               </Grid>
 
@@ -47,10 +47,10 @@ export default function ReportWeek() {
           </AccordionSummary>
           <AccordionDetails>
             <Grid container>
-              <Grid item xs={8}>
+              <Grid item xs={7}>
                 <p>{report.content}</p>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={5}>
                 <Grid container>
                   <CommentOpinion />
                 </Grid>

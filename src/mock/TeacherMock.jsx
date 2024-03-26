@@ -1,7 +1,6 @@
 const TeacherMock = [
   {
     id: '01220022',
-
     nganh: 'Kỹ thuật phần mềm',
     hoTen: 'Nguyễn Thị Hạnh',
     gioiTinh: false,

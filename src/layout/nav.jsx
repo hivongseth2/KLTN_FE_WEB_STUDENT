@@ -3,15 +3,7 @@ import { Drawer, List } from '@mui/material';
 import { HomeOutlined, RequestPageOutlined } from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 import ListItemButton from '@/components/ListItemButton';
-import {
-  TEACHER,
-  CHAT,
-  INTERNSHIP,
-  SPEC,
-  DOCUMENT,
-  DASHBOARD,
-  DEPARTMENT,
-} from '@/layout/constants';
+import { CHAT, NOTI, REPORT, DOCUMENT, DASHBOARD } from '@/layout/constants';
 
 import {
   DepartmentIcon,
@@ -23,12 +15,10 @@ import {
 
 const pathToItemMap = {
   '/': DASHBOARD,
-  '/teacher': TEACHER,
+  '/report': REPORT,
   '/chat': CHAT,
-  '/internship': INTERNSHIP,
-  '/specialized': SPEC,
   '/document': DOCUMENT,
-  '/department': DEPARTMENT,
+  '/noti': NOTI,
 };
 
 export default function Header() {
@@ -66,10 +56,10 @@ export default function Header() {
           title="Trang chủ"
         />
         <ListItemButton
-          selectedItem={selectedItem === INTERNSHIP}
+          selectedItem={selectedItem === REPORT}
           icon={<RequestPageOutlined />}
-          link="/internship"
-          title="Quản lý khóa thực tập"
+          link="/report"
+          title="Báo cáo hàng tuần"
         />
 
         <ListItemButton
@@ -78,30 +68,30 @@ export default function Header() {
           link="/document"
           title="Quản lý tài liệu"
         />
-        <ListItemButton
+        {/* <ListItemButton
           selectedItem={selectedItem === TEACHER}
           icon={<TeacherIcon width={24} height={24} />}
           link="/teacher"
           title="Quản lý giảng viên"
-        />
+        /> */}
         <ListItemButton
           selectedItem={selectedItem === CHAT}
           icon={<TeacherChatIcon width={24} height={24} />}
           link="/chat"
           title="Tin nhắn"
         />
-        <ListItemButton
+        {/* <ListItemButton
           selectedItem={selectedItem === DEPARTMENT}
           icon={<DepartmentIcon width={24} height={24} />}
           link="/department"
           title="Quản lý khoa"
-        />
-        <ListItemButton
+        /> */}
+        {/* <ListItemButton
           selectedItem={selectedItem === SPEC}
           icon={<SpecIcon width={24} height={24} />}
           link="/specialized"
           title="Quản lý chuyên ngành"
-        />
+        /> */}
       </List>
     </Drawer>
   );
