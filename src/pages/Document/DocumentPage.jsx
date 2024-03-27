@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import TableDocument from '@/components/DocumentComponent/TableDocument';
 import Header from '@/components/Header/Header';
+import NewsCard from '@/components/NewsComponent/NewsCard';
 
 function DocumentPage() {
   return (
@@ -18,26 +19,17 @@ function DocumentPage() {
       <Grid
         container
         xs={12}
-        sx={{ justifyContent: 'space-between', display: 'flex', my: 3 }}
+        sx={{ justifyContent: 'space-around', display: 'flex', my: 3 }}
       >
-        <Grid item xs={7}>
-          <Button variant="contained">Thêm khóa</Button>
-        </Grid>
-        <Grid item xs={5} sx={{ justifyContent: 'center', display: 'flex' }}>
-          <FormControl>
-            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-              Loại tài liệu
-            </InputLabel>
-            <NativeSelect defaultValue={0}>
-              <option value={0}>Tất cả</option>
-              <option value={10}>Không cho gửi file</option>
-              <option value={20}>Cho phép gửi file</option>
-            </NativeSelect>
-          </FormControl>
-        </Grid>
-      </Grid>
-      <Grid item xs={12} sx={{ mr: 3 }}>
-        <TableDocument />
+        {[1, 2, 3, 4, 5, 6].map(
+          (
+            item, // Thay đổi [1, 2, 3, 4, 5, 6] thành mảng tin tức thực tế
+          ) => (
+            <Grid item xs={12} sm={6} md={4} key={item}>
+              <NewsCard />
+            </Grid>
+          ),
+        )}
       </Grid>
     </Grid>
   );
