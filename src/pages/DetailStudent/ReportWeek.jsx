@@ -9,9 +9,15 @@ import { Grid, Typography } from '@mui/material';
 import WeekReport from '@/mock/WeekReport';
 import RateStar from '@/components/DetailStudent/RateStar';
 import CommentOpinion from '@/components/DetailStudent/Comment';
+import EditReportComponent from '@/components/reportPageCom/EditReportComponent';
 
 export default function ReportWeek() {
   const [selectedWeek, setSelectedWeek] = React.useState(null);
+  const [edit, setEdit] = React.useState(false);
+
+  const handleEditClick = () => {
+    setEdit(!edit);
+  };
 
   const handleWeekClick = (week) => {
     setSelectedWeek(week);
@@ -47,19 +53,25 @@ export default function ReportWeek() {
           </AccordionSummary>
           <AccordionDetails>
             <Grid container>
-              <Grid item xs={7}>
-                <p>{report.content}</p>
+              <Grid item xs={12} sx={{ minHeight: 150 }}>
+                <EditReportComponent report={report.content} edit={edit} />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={12} sx={{ marginTop: 2 }}>
                 <Grid container>
                   <CommentOpinion />
                 </Grid>
               </Grid>
             </Grid>
           </AccordionDetails>
-          <AccordionActions>
-            <Button>Cancel</Button>
-            <Button>Agree</Button>
+          <AccordionActions sx={{ justifyContent: 'flex-start' }}>
+            <Button>Hủy</Button>
+            <Button
+              onClick={() => {
+                handleEditClick();
+              }}
+            >
+              Sửa
+            </Button>
           </AccordionActions>
         </Accordion>
       ))}

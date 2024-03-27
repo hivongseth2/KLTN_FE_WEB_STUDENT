@@ -11,12 +11,18 @@ import { Link } from 'react-router-dom';
 import DocumentFormMock from '@/mock/DocumentFormMock';
 import RateStar from '@/components/DetailStudent/RateStar';
 import CommentOpinion from '@/components/DetailStudent/Comment';
+import FileUploadComponent from '@/components/reportPageCom/FileUploadComponent';
 
 export default function DocumentAccordion() {
   const [selectedDocument, setSelectedDocument] = React.useState(null);
+  const [editMode, setEditMode] = React.useState(false);
 
   const handleDocumentClick = (documentId) => {
     setSelectedDocument(documentId);
+  };
+
+  const handleEditClick = () => {
+    setEditMode(!editMode);
   };
 
   return (
@@ -64,10 +70,22 @@ export default function DocumentAccordion() {
               </Grid>
             </Grid>
           </AccordionDetails>
-          <AccordionActions>
-            <Button>Cancel</Button>
-            <Button>Agree</Button>
+          <AccordionActions sx={{ justifyContent: 'flex-start' }}>
+            {!editMode && (
+              <Button
+                onClick={handleEditClick}
+                color="secondary"
+                variant="contained"
+              >
+                Sửa
+              </Button>
+            )}
           </AccordionActions>
+          {editMode && (
+            <AccordionDetails>
+              <FileUploadComponent handleEditClick={handleEditClick} />
+            </AccordionDetails>
+          )}
         </Accordion>
       ))}
     </div>
