@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
-import { Button, Stack } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { useEffect } from 'react';
 
 const FileUploadComponent = ({ handleEditClick }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
     // Lấy tập tin đầu tiên từ danh sách tập tin đã chọn
-    const file = event.target.files[0];
-    console.log(file);
-    setSelectedFile(file); // Lưu trữ đối tượng File
+
+    setSelectedFile(event.target.files[0]); // Lưu trữ đối tượng File
   };
 
   const handleUpload = () => {
     // Thực hiện xử lý tải lên tập tin ở đây
-    console.log(selectedFile); // Log ra thông tin về tập tin đã chọn
+    if (selectedFile) {
+      console.log(selectedFile); // Log ra thông tin về tập tin đã chọn
+      // Code để tải lên tập tin
+    }
   };
+
+  useEffect(() => {
+    if (selectedFile) console.log(selectedFile.name);
+  }, [selectedFile]);
 
   return (
     <Stack direction="row" spacing={2} alignItems="center">
@@ -37,11 +44,12 @@ const FileUploadComponent = ({ handleEditClick }) => {
         </Button>
       </label>
       {selectedFile && (
-        <span>
+        <Typography sx={{ height: 20 }}>
           {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)}{' '}
           MB)
-        </span>
+        </Typography>
       )}
+
       <Button onClick={handleUpload} variant="contained" color="success">
         Tải lên
       </Button>

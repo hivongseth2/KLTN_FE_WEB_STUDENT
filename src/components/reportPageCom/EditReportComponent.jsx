@@ -1,27 +1,29 @@
-import { Typography } from '@mui/material';
 import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import JoditEditor from 'jodit-react';
+import { configJodit } from '@/constaints/configJodit'; // Make sure the import path is correct
+import { useMemo } from 'react';
 
-const EditReportComponent = ({ report, edit }) => {
-  const [text, setText] = useState(report); // Quản lý nội dung với hook useState
+const MyEditorComponent = () => {
+  const [content, setContent] = useState('');
 
-  // Hàm xử lý thay đổi nội dung
-  const handleChange = (content) => {
-    setText(content);
+  const config = useMemo(
+    () => configJodit, // Pass the configJodit directly
+    [], // Empty dependency array because the config doesn't depend on any variables
+  );
+
+  const handleChange = (newContent) => {
+    setContent(newContent);
   };
 
-  if (edit) {
-    return (
-      <ReactQuill
-        theme="snow" // Chủ đề snow là chủ đề mặc định và phổ biến
-        value={text} // Nội dung hiện tại của trình soạn thảo
-        onChange={handleChange} // Xử lý sự kiện khi nội dung thay đổi
-      />
-    );
-  } else {
-    return <div dangerouslySetInnerHTML={{ __html: text }} />;
-  }
+  return (
+    <JoditEditor
+      value={content}
+      config={config}
+      tabIndex={1}
+      onBlur={(newContent) => handleChange(newContent)}
+      onChange={(newContent) => handleChange(newContent)}
+    />
+  );
 };
 
-export default EditReportComponent;
+export default MyEditorComponent;
